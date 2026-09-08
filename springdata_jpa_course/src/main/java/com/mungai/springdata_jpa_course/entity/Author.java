@@ -13,6 +13,10 @@ import java.util.List;
 @SuperBuilder
 @Data
 @Entity
+@NamedQuery(
+        name = "Author.findByNamedQuery",
+        query = "select a from Author a where a.age >= :age"
+)
 @Table(name = "authors")
 public class Author extends BaseEntity {
 
@@ -27,6 +31,7 @@ public class Author extends BaseEntity {
     @Column(updatable = true, insertable = false)
     private LocalDateTime lastModified;
 
+    @ToString.Exclude
     @ManyToMany(mappedBy = "authors")
     private List<Course> courses;
 }
